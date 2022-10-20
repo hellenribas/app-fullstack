@@ -3,7 +3,7 @@ const { generateToken } = require('../utils/token');
 const { validateBody } = require('../utils/validateBody');
 
 
-const login = async (email, senha) => {
+const login = async ({ email, senha }) => {
   const validate = validateBody({ email, senha });
   if (validate.message) return validate
   const data = await User.findOne({ where: { email, senha } });

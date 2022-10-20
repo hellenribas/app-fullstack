@@ -21,7 +21,17 @@ const addTask = async (req, res, next) => {
   }
 }
 
+const deletedTask = async (req, res, next) => {
+  try {
+    await taskService.deletedTask(req.headers);
+    return res.status(StatusCodes.OK).end();
+  } catch (e) {
+    next(e)
+  }
+}
+
 module.exports = {
   getTasks,
   addTask,
+  deletedTask,
 }

@@ -12,6 +12,7 @@ const app = express();
 app.use(express.json());
 
 app.use('/login', loginRouter);
+
 app.use('/', tokenValidate);
 app.use('/tasks', taskRouter);
 app.use('/user', userRouter);
