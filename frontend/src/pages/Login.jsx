@@ -1,34 +1,12 @@
 import React from 'react'
-import { useState } from 'react';
-import style from './style/Login.module.css';
-
+import { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import appContext from '../context/appContext';
+import style from '../style/Form.module.css';
 
 export default function Login() {
-  const [email, setEmail]  = useState('');
-  const [password, setPassword]  = useState('');
-  const [isDisabled, setDisabled]  = useState(true);
-  
+  const {email, handleEmail, handlePassword, password, isDisabled, login,error} = useContext(appContext);
 
-  const handleEmail = ({ target }) => {
-    setEmail(target.value)
-    validate()
-  }
-
-  const handlePassword = ({ target }) => {
-    setPassword(target.value)
-    validate()
-  }
-
-  const validate = () => {
-    const { email, password } = this.state;
-    const numbersix = 6;
-    if (email.match(/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/)
-    && password.length >= numbersix) {
-      setDisabled(false);
-    } else {
-      setDisabled(true);
-    }
-  }
   return (
     <main className={ style.main }>
       <form className={ style.form }>
@@ -58,10 +36,16 @@ export default function Login() {
           type="button"
           disabled={ isDisabled }
           className={ style.button }
+          onClick={ login }
         >
           ENTRAR
 
         </button>
+        <p>
+          Ainda não tem cadastro?
+        <Link to="/register">Cadastre-se</Link>
+        </p>
+        { error && <p className={ style.error }>{error}</p> }
       </form>
     </main>
   );

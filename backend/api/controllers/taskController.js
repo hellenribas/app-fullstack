@@ -4,8 +4,8 @@ const { StatusCodes } = require('http-status-codes');
 
 const getTasks = async (req, res, next) => {
   try {
-    const { id } = req.body;
-    const request = await taskService.getTasks(id);
+    const token = req.headers;
+    const request = await taskService.getTasks(token);
     return res.status(StatusCodes.OK).send(request);
   } catch (e) {
     next(e)

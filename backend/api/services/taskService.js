@@ -2,8 +2,11 @@ const { Task, User } = require('../database/models/index');
 const tokenValid = require('../utils/token');
 
 
-const getTasks = async (id) => {
-  const tasks = await Task.findAll({ where: { userId: id }, attributes: { exclude: ['userId'] } });
+const getTasks = async (token) => {
+  const { email } = tokenValid.decoded(token.authorization);
+  const existUser = await User.findOne({ where: { email } });
+  if (!existUser) throw new Error('Usuário inválido');
+  const tasks = await Task.findAll({ where: { userId: existUser.id }, attributes: { exclude: ['userId'] } });
   return tasks;
 }
 

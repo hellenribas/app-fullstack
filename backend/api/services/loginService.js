@@ -10,7 +10,7 @@ const login = async ({ email, senha }) => {
   if (!data) {
     throw new Error('Email ou senha inválidos')
   }
-  return generateToken({email, senha})
+  return { token: generateToken({email, senha}) }
 }
 
 const register = async ({ email, senha, nome, telefone }) => {
@@ -19,7 +19,7 @@ const register = async ({ email, senha, nome, telefone }) => {
     const existUser = await User.findOne({ where: { email } });
     if (existUser) return { status: 409, message: 'Usuário já cadastrado' };
     await User.create({ nome, email, senha, telefone });
-    return generateToken({ email, senha });
+    return { token: generateToken({ email, senha }) };
 }
 
 module.exports = {
