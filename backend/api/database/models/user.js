@@ -27,7 +27,9 @@ const User = (sequelize, DataTypes) => {
     timestamps: false,
     underscored: true
   });
-
+  User.associate = (models) => {
+    User.hasMany(models.Task, { foreignKey: 'userId' })
+  }
   return User;
 }
 
