@@ -1,35 +1,36 @@
 const Joi = require('joi');
+// const md5 = require('md5');
+const { User } = require('../database/models/index');
+const { generateToken } = require('../utils/token');
 
-const encryptPassword = ({ password }) => {
-  return md5(password);
-}
+// const encryptPassword = ({ senha }) => {
+//   return md5(senha);
+// }
 
-const validateBodyLogin = ({ email, password }) => {
+const validateBodyLogin = ({ email, senha }) => {
   const schema = Joi.object({
     email: Joi.string().email().required(),
-    password: Joi.string().min(6).required(),
+    senha: Joi.string().min(6).required(),
   });
 
-const { error, value } = schema.validate({ email, password });
+const { error, value } = schema.validate({ email, senha });
 if (error) {
   return { status: 400, message: error.details[0].message };
 }
 return value;
 } 
 
-const login = ({ email, password }) => {
-  const validate = validateBodyLogin({ email, password });
-  const encry = encryptPassword(password);
-  if (validate.message) {
-    return validate
-  }
-  const data = User.findOne({ where: { email, senha: encry} });
+const login = async (email, senha) => {
+  const validate = validateBodyLogin({ email, senha });
+  // const encry = encryptPassword(senha);
+  if (validate.message) return validate
+  const data = await User.findOne({ where: { email, senha } });
   if (!data) {
     throw new Error('Email ou senha inválidos')
   }
-  return data;
+  return generateToken({email, senha})
 }
 
 module.exports = {
-  login
+  login,
 }

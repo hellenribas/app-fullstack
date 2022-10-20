@@ -1,19 +1,6 @@
 version: "3"
 
 services:
-  node:
-    build: .
-    container_name: project
-    restart: always
-    depends_on:
-      db:
-        condition: service_healthy
-    ports:
-      - 3001:3000
-    environment:
-      MYSQL_USER: root
-      MYSQL_PASSWORD: password
-
   db:
     container_name: fullstack_db
     image: mysql:5.7
@@ -21,6 +8,3 @@ services:
       MYSQL_ROOT_PASSWORD: password
     ports:
       - 3306:3306
-networks:
-  default:
-    name: fullstack_net
