@@ -16,8 +16,8 @@ const login = async (req, res, next) => {
 
 const register = async (req, res, next) => {
   try {
-    const request = await userService.login(req.body);
-    res.status(StatusCodes.OK).send(request);
+    const request = await userService.register(req.body);
+    return res.status(StatusCodes.OK).send(request);
   } catch (e) {
     next(e)
   }
