@@ -21,5 +21,4 @@
 - npm start - roda o node
 - npm run debug - roda o nodemon
 - npm run prestart - roda o sequelize-cli
-
 ---
