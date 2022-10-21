@@ -14,6 +14,7 @@ export default function Form() {
       handlePhone, 
       handlePassword,
       editUser,
+      removeCount,
       register} = useContext(AppContext);
       const location = useLocation()
   return (
@@ -35,7 +36,10 @@ export default function Form() {
     <input type="text" id='phone' value={phone} onChange={handlePhone} />
     </label>
     { location.pathname === '/user' ? (
-      <button type='button' onClick={ editUser }>Editar</button>
+      <div>
+        <button type='button' onClick={ editUser }>Editar</button>
+        <button type='button' onClick={ removeCount }>Encerrar Conta</button>
+      </div>
     ) :
      (<button type='submit' onClick={ register }>Cadastrar</button> )}
   </form>

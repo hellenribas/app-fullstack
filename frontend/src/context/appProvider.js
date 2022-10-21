@@ -99,7 +99,6 @@ function AppProvider ({ children }) {
 
   const getTasks = async () => {
     const token = localStorage.getItem('token');
-    console.log(token);
     const request = await fetch('http://localhost:3001/tasks', {
       method: 'GET',
       headers: { 'Content-type': 'application/json; charset=UTF-8', Authorization: token },
@@ -148,6 +147,15 @@ function AppProvider ({ children }) {
     localStorage.setItem('token', data.token)
     navigate('/home')
   }
+
+  const removeCount = async () => {
+    const token = localStorage.getItem('token');
+    await fetch('http://localhost:3001/user/delete', {
+      method: 'DELETE',
+      headers: { 'Content-type': 'application/json; charset=UTF-8', Authorization: token },
+    });
+    navigate('/')
+  }
   
 
 
@@ -174,6 +182,7 @@ function AppProvider ({ children }) {
     description,
     handleDescription,
     editUser,
+    removeCount,
   }
 
   return (

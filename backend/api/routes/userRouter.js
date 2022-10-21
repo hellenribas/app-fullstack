@@ -6,6 +6,6 @@ const router = express.Router();
 
 router.use('/', tokenValidate);
 router.put('/update', userController.update);
-router.delete('/delete/:id', userController.deleted);
+router.delete('/delete', userController.deleted);
 
 module.exports = router;
