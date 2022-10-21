@@ -2,8 +2,8 @@ import React from 'react'
 import { useContext } from 'react';
 import AppContext from '../context/appContext';
 import style from '../style/Header.module.css';
-import logo from '../images/logo.svg';
-import user from '../images/user-logo.svg';
+import logo from '../images/logo.png';
+import user from '../images/user.png';
 
 export default function Header() {
   const { email } = useContext(AppContext);
