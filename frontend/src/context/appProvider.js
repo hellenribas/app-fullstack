@@ -87,7 +87,7 @@ function AppProvider ({ children }) {
     }
   }
 
-  const getTasks = async (e) => {
+  const getTasks = async () => {
     const token = localStorage.getItem('token');
     const request = await fetch('http://localhost:3001/tasks', {
       method: 'GET',
@@ -97,6 +97,16 @@ function AppProvider ({ children }) {
     console.log(data);
     setData(data);
   }
+
+  const deleteTasks = async () => {
+    const token = localStorage.getItem('token');
+    await fetch('http://localhost:3001/tasks/delete/all', {
+      method: 'DELETE',
+      headers: { 'Content-type': 'application/json; charset=UTF-8', Authorization: token },
+    });
+    getTasks();
+  }
+  
 
 
   const contexto = {
@@ -114,7 +124,8 @@ function AppProvider ({ children }) {
     error,
     error2,
     getTasks,
-    data
+    data,
+    deleteTasks
   }
 
   return (

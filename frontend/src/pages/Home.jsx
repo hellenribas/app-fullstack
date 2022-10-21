@@ -7,7 +7,7 @@ import style from '../style/Home.module.css';
 
 
 export default function Home() {
-  const { data, getTasks } = useContext(AppContext);
+  const { data, getTasks, deleteTasks } = useContext(AppContext);
 
   useEffect(() => {
     getTasks()
@@ -33,6 +33,7 @@ export default function Home() {
           </tbody>
         </table>
     </main>
+        <button type='button' onClick={ deleteTasks }>Excluir Tarefas</button>
     </div>
   )
 }
