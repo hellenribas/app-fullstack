@@ -116,6 +116,11 @@ function AppProvider ({ children }) {
     getTasks();
   }
 
+  const resetInputs = () => {
+    setTask('');
+    setDescription('');
+  }
+
   const addTask = async () => {
     const body = JSON.stringify({
       tarefa: task,
@@ -127,7 +132,7 @@ function AppProvider ({ children }) {
       headers: { 'Content-type': 'application/json; charset=UTF-8', Authorization: token },
       body,
     });
-    
+    resetInputs();
   }
 
   const editUser = async () => {
