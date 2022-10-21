@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect } from 'react';
 import { useContext } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import AppContext from '../context/appContext'
 import style from '../style/Home.module.css';
@@ -9,7 +9,7 @@ import style from '../style/Home.module.css';
 
 export default function Home() {
   const { data, getTasks, deleteTasks } = useContext(AppContext);
-
+  const navigate = useNavigate();
   useEffect(() => {
     getTasks()
   }, [])
@@ -52,6 +52,7 @@ export default function Home() {
         </table>)}
     </main>
         <button type='button' onClick={ deleteTasks }>Excluir Tarefas</button>
+        <button type='button' onClick={ () => navigate('/add') }>adicionar Tarefa</button>
     </div>
   )
 }

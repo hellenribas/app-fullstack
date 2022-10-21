@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import User from './pages/User';
 import AppProvider from './context/appProvider';
 import Register from './pages/Register';
+import AddTask from './pages/AddTask';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path='/' element={ <Login /> } />
         <Route path='/register' element={ <Register /> } />
         <Route path='/home' element={ <Home /> }/>
+        <Route path='/add' element={ <AddTask /> }/>
         <Route path='/user' element={ <User /> }/>
       </Routes>
     </AppProvider>

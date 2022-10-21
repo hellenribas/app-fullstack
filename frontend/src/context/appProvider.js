@@ -9,6 +9,8 @@ function AppProvider ({ children }) {
   const [password, setPassword]  = useState('');
   const [name, setName]  = useState('');
   const [phone, setPhone]  = useState('');
+  const [task, setTask]  = useState('');
+  const [description, setDescription]  = useState('');
   const [data, setData]  = useState([]);
   const [error, setError]  = useState('');
   const [error2, setError2]  = useState('');
@@ -30,6 +32,14 @@ function AppProvider ({ children }) {
 
   const handlePhone = ({ target }) => {
     setPhone(target.value)
+  }
+
+  const handleTask = ({ target }) => {
+    setTask(target.value)
+  }
+
+  const handleDescription = ({ target }) => {
+    setDescription(target.value)
   }
 
   const validate = useCallback(() => {
@@ -94,7 +104,6 @@ function AppProvider ({ children }) {
       headers: { 'Content-type': 'application/json; charset=UTF-8', Authorization: token },
     });
     const data = await request.json();
-    console.log(data);
     setData(data);
   }
 
@@ -105,6 +114,20 @@ function AppProvider ({ children }) {
       headers: { 'Content-type': 'application/json; charset=UTF-8', Authorization: token },
     });
     getTasks();
+  }
+
+  const addTask = async () => {
+    const body = JSON.stringify({
+      tarefa: task,
+      descricao: description,
+    })
+    const token = localStorage.getItem('token');
+    await fetch('http://localhost:3001/tasks/add', {
+      method: 'POST',
+      headers: { 'Content-type': 'application/json; charset=UTF-8', Authorization: token },
+      body,
+    });
+    
   }
   
 
@@ -125,7 +148,12 @@ function AppProvider ({ children }) {
     error2,
     getTasks,
     data,
-    deleteTasks
+    deleteTasks,
+    addTask,
+    task,
+    handleTask,
+    description,
+    handleDescription,
   }
 
   return (
