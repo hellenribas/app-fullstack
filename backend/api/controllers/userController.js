@@ -3,7 +3,8 @@ const { StatusCodes } = require('http-status-codes');
 
 const update = async (req, res, next) => {
   try {
-    const request = await userService.update(req.body);
+    const token = req.headers;
+    const request = await userService.update(req.body, token);
     if (request.message) return res.status(request.status)
     return res.status(StatusCodes.OK).send(request);
   } catch (e) {

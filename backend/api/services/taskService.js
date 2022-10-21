@@ -10,8 +10,10 @@ const getTasks = async (token) => {
   return tasks;
 }
 
-const addTask = async ({ tarefa, descricao='', userId }) => {
-  const idCreate =  await Task.create({ tarefa, descricao, userId });
+const addTask = async ({ tarefa, descricao='' }, token) => {
+  const { email } = tokenValid.decoded(token.authorization);
+  const existUser = await User.findOne({ where: { email } });
+  const idCreate =  await Task.create({ tarefa, descricao, userId: existUser.id });
   return idCreate;
 }
 

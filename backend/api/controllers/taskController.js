@@ -14,7 +14,7 @@ const getTasks = async (req, res, next) => {
 
 const addTask = async (req, res, next) => {
   try {
-    const request = await taskService.addTask(req.body);
+    const request = await taskService.addTask(req.body, req.headers);
     return res.status(StatusCodes.OK).send(request);
   } catch (e) {
     next(e)

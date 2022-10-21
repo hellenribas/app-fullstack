@@ -3,11 +3,14 @@ const { validateBody } = require('../utils/validateBody');
 const tokenValid = require('../utils/token');
 
 
-const update = async ({ id, email, senha, nome, telefone }) => {
+const update = async ({ email, senha, nome, telefone }, token) => {
+  const valid = tokenValid.decoded(token.authorization);
+  const existUser = await User.findOne({ where: { email: valid.email } });
   const validateUser = validateBody({ email, senha });
   if (validateUser.message) return validateUser;
-  const idUser = await User.update({ nome, email, senha, telefone }, { where: { id } });
-  return idUser;
+  await User.update({ nome, email, senha, telefone }, { where: { id: existUser.id } });
+  const newToken = {token: tokenValid.generateToken({ email })};
+  return newToken;
 }
 
 const deleted = async (token) => {
