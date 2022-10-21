@@ -51,8 +51,10 @@ export default function Home() {
           </tbody>
         </table>)}
     </main>
+      <section className={ style.containerButton }>    
         <button type='button' onClick={ deleteTasks }>Excluir Tarefas</button>
-        <button type='button' onClick={ () => navigate('/add') }>adicionar Tarefa</button>
+        <button type='button' onClick={ () => navigate('/add') }>Adicionar Tarefa</button>
+      </section>
     </div>
   )
 }

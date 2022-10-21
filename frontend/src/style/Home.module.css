@@ -110,7 +110,7 @@
   justify-content: center;
 }
 
-.button {
+.container button {
   align-items: center;
   background: #0f4571;
   border: outset 0.1rem #09611d;
@@ -119,12 +119,19 @@
   color: #f0f4f5;
   display: flex;
   font-family: Jost, Arial, Helvetica, sans-serif;
-  font-size: 2.2rem;
+  font-size: 1.2rem;
   font-weight: 600;
-  height: 5.2rem;
+  height: 3.2rem;
   justify-content: center;
-  line-height: 2.9rem;
-  width: 22rem;
+  line-height: 1.9rem;
+  width: 18rem;
+  margin: 1%;
+}
+
+.containerButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media only screen and ( max-width : 48rem ) {
