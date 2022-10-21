@@ -110,7 +110,7 @@
   justify-content: center;
 }
 
-.container button {
+.containerButton button {
   align-items: center;
   background: #0f4571;
   border: outset 0.1rem #09611d;
