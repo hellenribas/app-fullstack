@@ -1,6 +1,7 @@
 import React from 'react'
 import { useEffect } from 'react';
 import { useContext } from 'react'
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import AppContext from '../context/appContext'
 import style from '../style/Home.module.css';
@@ -16,7 +17,24 @@ export default function Home() {
     <div className={ style.container }>
       <Header />
       <main  className={ style.main }>
-        <table className={ style.table }>
+      {data.length === 0
+            ? (
+              <section className={ style.container_section }>
+                <Link
+                  to="/add"
+                >
+                  <button
+                    type="button"
+                    className={ style.link_task }
+                  >
+                    +
+                  </button>
+
+                </Link>
+                <h3>ADICIONAR TAREFA</h3>
+              </section>
+            ) :
+        (<table className={ style.table }>
           <thead>
             <tr>
               <td>Tarefa</td>
@@ -31,7 +49,7 @@ export default function Home() {
               </tr>
             ))}
           </tbody>
-        </table>
+        </table>)}
     </main>
         <button type='button' onClick={ deleteTasks }>Excluir Tarefas</button>
     </div>
