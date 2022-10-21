@@ -45,8 +45,8 @@ export default function Login() {
           Ainda não tem cadastro?
         <Link to="/register">Cadastre-se</Link>
         </p>
-        { error && <p className={ style.error }>{error}</p> }
       </form>
+        { error && <p className={ style.error }>{error}</p> }
     </main>
   );
 }

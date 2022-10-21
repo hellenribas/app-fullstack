@@ -104,6 +104,7 @@ function AppProvider ({ children }) {
       headers: { 'Content-type': 'application/json; charset=UTF-8', Authorization: token },
     });
     const data = await request.json();
+    console.log(data);
     setData(data);
   }
 
@@ -128,6 +129,22 @@ function AppProvider ({ children }) {
       body,
     });
     
+  }
+
+  const editUser = async () => {
+    const body = JSON.stringify({
+      nome: name,
+      email,
+      senha: password,
+      telefone: phone,
+    })
+    const token = localStorage.getItem('token');
+    await fetch('http://localhost:3001/user/update', {
+      method: 'PUT',
+      headers: { 'Content-type': 'application/json; charset=UTF-8', Authorization: token },
+      body,
+    });
+    navigate('/home')
   }
   
 
@@ -154,6 +171,7 @@ function AppProvider ({ children }) {
     handleTask,
     description,
     handleDescription,
+    editUser,
   }
 
   return (
